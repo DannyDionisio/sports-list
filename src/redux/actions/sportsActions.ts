@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Dispatch } from "redux";
 import { api } from "../../services/api";
 import { Sport } from "../reducers/sportsReducer";

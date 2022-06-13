@@ -12,7 +12,7 @@ export const SportsListWrapper = styled.ul`
   justify-content: center;
 `;
 
-export const Card = styled.div`
+export const CardStyle = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
