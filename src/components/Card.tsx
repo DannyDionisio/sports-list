@@ -52,13 +52,13 @@ export const Card: React.FC<CardProps> = ({ sport, onClickFavorite }) => {
             </Link>
           </Button>
 
-          <div onClick={() => onClickFavorite(sport, !isFavorite)}>
+          <button onClick={() => onClickFavorite(sport, !isFavorite)}>
             {isFavorite ? (
               <AiFillHeart size={35} />
             ) : (
               <AiOutlineHeart size={35} />
             )}
-          </div>
+          </button>
         </FooterWrapper>
       </div>
     </CardStyle>
