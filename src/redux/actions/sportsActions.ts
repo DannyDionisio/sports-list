@@ -4,6 +4,10 @@ import { Sport } from "../reducers/sportsReducer";
 
 export const getSports = () => {
   return (useDispatch: Dispatch) => {
+    useDispatch({
+      type: "LOADING",
+    });
+
     api.get("sports").then((response) => {
       useDispatch({
         type: "GET_SPORTS",
@@ -15,6 +19,10 @@ export const getSports = () => {
 
 export const getSportById = (id: string) => {
   return (useDispatch: Dispatch) => {
+    useDispatch({
+      type: "LOADING",
+    });
+
     api.get(`sports/${id}`).then((response) => {
       useDispatch({
         type: "GET_SPORT",

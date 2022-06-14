@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { SportsListWrapper, TitlePage } from "../styles";
+import { LoadingSpinner, SportsListWrapper, TitlePage } from "../styles";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,12 +11,16 @@ import {
 import { RootState } from "../redux/reducers/rootReducer";
 import { Sport } from "../redux/reducers/sportsReducer";
 import { Card } from "../components/Card";
+import { ThemeProvider } from "styled-components";
 
 export const SportsList = () => {
   const dispatch = useDispatch();
   const sportsList = useSelector((state: RootState) => state.sports.list);
+  const loading = useSelector((state: RootState) => state.sports.loading);
 
   useEffect(() => {
+    //dispatch(getSports());
+
     getSports()(dispatch);
   }, [dispatch]);
 
@@ -26,20 +30,26 @@ export const SportsList = () => {
 
   return (
     <>
-      <TitlePage>Sports List</TitlePage>
+      <ThemeProvider theme={{ color: "#0082c3" }}>
+        <TitlePage>Sports List</TitlePage>
+      </ThemeProvider>
 
       <div>
-        <SportsListWrapper>
-          {sportsList.map((sport: Sport) => {
-            return (
-              <Card
-                key={sport.id}
-                sport={sport}
-                onClickFavorite={handleFavoriteClick}
-              />
-            );
-          })}
-        </SportsListWrapper>
+        {loading ? (
+          <LoadingSpinner size={100} />
+        ) : (
+          <SportsListWrapper>
+            {sportsList.map((sport: Sport) => {
+              return (
+                <Card
+                  key={sport.id}
+                  sport={sport}
+                  onClickFavorite={handleFavoriteClick}
+                />
+              );
+            })}
+          </SportsListWrapper>
+        )}
       </div>
     </>
   );

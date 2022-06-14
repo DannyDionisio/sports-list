@@ -3,6 +3,7 @@ import React from "react";
 import {
   Button,
   CardStyle,
+  FavoriteButton,
   FooterWrapper,
   IconWrapper,
   Title,
@@ -52,13 +53,13 @@ export const Card: React.FC<CardProps> = ({ sport, onClickFavorite }) => {
             </Link>
           </Button>
 
-          <button onClick={() => onClickFavorite(sport, !isFavorite)}>
+          <FavoriteButton onClick={() => onClickFavorite(sport, !isFavorite)}>
             {isFavorite ? (
               <AiFillHeart size={35} />
             ) : (
               <AiOutlineHeart size={35} />
             )}
-          </button>
+          </FavoriteButton>
         </FooterWrapper>
       </div>
     </CardStyle>

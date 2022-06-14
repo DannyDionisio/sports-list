@@ -1,8 +1,26 @@
-import styled from "styled-components";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import styled, { keyframes } from "styled-components";
 
 export const TitlePage = styled.h1`
-  color: #0082c3;
+  color: ${(props) => props.theme.color};
   text-align: center;
+`;
+
+const spin = keyframes`
+  from {
+            transform: rotate(0deg);
+  }
+  to {
+            transform: rotate(359deg);
+  }
+`;
+
+//Loading
+export const LoadingSpinner = styled(AiOutlineLoading3Quarters)`
+  color: #0082c3;
+  animation: ${spin} 1s linear infinite;
+  margin: 100px 0;
+  width: 100%;
 `;
 
 //SportsList
@@ -80,4 +98,10 @@ export const TagsWrapper = styled.div`
   gap: 8px;
   justify-content: space-between;
   margin: 30px 0;
+`;
+
+//Card
+export const FavoriteButton = styled.button`
+  border: none;
+  background: none;
 `;

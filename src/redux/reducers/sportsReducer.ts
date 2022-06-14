@@ -23,34 +23,45 @@ interface SportsState {
   list: Sport[];
   sport: Sport | null;
   favorites: Sport["id"][];
+  loading: boolean;
 }
 
 const initialState: SportsState = {
   list: [],
   sport: null,
   favorites: [],
+  loading: false,
 };
 
 type GetSportsPayload = PayloadAction<Sport[], "GET_SPORTS">;
 type GetSportByIdPayload = PayloadAction<Sport, "GET_SPORT">;
 type LikeSportByIdPayload = PayloadAction<Sport, "LIKE_SPORT">;
 type UnLikeSportByIdPayload = PayloadAction<Sport, "UNLIKE_SPORT">;
+type LoadingPayload = PayloadAction<Sport, "LOADING">;
 type SportsPayload =
   | GetSportsPayload
   | GetSportByIdPayload
   | LikeSportByIdPayload
-  | UnLikeSportByIdPayload;
+  | UnLikeSportByIdPayload
+  | LoadingPayload;
 
 export const sportsReducer = (state = initialState, action: SportsPayload) => {
   switch (action.type) {
+    case "LOADING":
+      return {
+        ...state,
+        loading: true,
+      };
     case "GET_SPORTS":
       return {
         ...state,
+        loading: false,
         list: action.payload,
       };
     case "GET_SPORT":
       return {
         ...state,
+        loading: false,
         sport: action.payload,
       };
     case "LIKE_SPORT":
@@ -65,6 +76,7 @@ export const sportsReducer = (state = initialState, action: SportsPayload) => {
           (favorite) => favorite !== action.payload.id
         ),
       };
+
     default:
       return state;
   }
