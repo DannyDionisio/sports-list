@@ -1,13 +1,11 @@
-import { configureStore, MiddlewareArray } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-import { rootReducer } from "./reducers/rootReducer";
-import logger from "redux-logger";
+import { configureStore } from "@reduxjs/toolkit";
+import sportsReducer from "../features/sports/sportsSlice";
 
 export const store = configureStore({
-  reducer: rootReducer,
-  middleware: new MiddlewareArray().concat(logger),
+  reducer: {
+    sports: sportsReducer,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
-
-export const useAppDispatch = () => useDispatch<AppDispatch>();
+export type RootState = ReturnType<typeof store.getState>;

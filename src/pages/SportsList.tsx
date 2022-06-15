@@ -2,30 +2,26 @@ import React, { useEffect } from "react";
 
 import { LoadingSpinner, SportsListWrapper, TitlePage } from "../styles";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getSports,
-  likeSport,
-  unlikeSport,
-} from "../redux/actions/sportsActions";
-import { RootState } from "../redux/reducers/rootReducer";
-import { Sport } from "../redux/reducers/sportsReducer";
+import { useDispatch } from "react-redux";
 import { Card } from "../components/Card";
 import { ThemeProvider } from "styled-components";
+import { useAppSelector } from "../redux/hooks";
+import { getSports } from "../features/sports/sportsSlice";
+import { likeSport, unlikeSport } from "../features/sports/sportsSlice";
+import { AnyAction } from "redux";
+import { Sport } from "../models/models";
 
 export const SportsList = () => {
   const dispatch = useDispatch();
-  const sportsList = useSelector((state: RootState) => state.sports.list);
-  const loading = useSelector((state: RootState) => state.sports.loading);
+  const sportsList = useAppSelector((state) => state.sports.list);
+  const loading = useAppSelector((state) => state.sports.loading);
 
   useEffect(() => {
-    //dispatch(getSports());
-
-    getSports()(dispatch);
+    dispatch(getSports() as any as AnyAction);
   }, [dispatch]);
 
   const handleFavoriteClick = (sport: Sport, isFavorite: boolean) => {
-    isFavorite ? likeSport(sport)(dispatch) : unlikeSport(sport)(dispatch);
+    isFavorite ? dispatch(likeSport(sport)) : dispatch(unlikeSport(sport));
   };
 
   return (

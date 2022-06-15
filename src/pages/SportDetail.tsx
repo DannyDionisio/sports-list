@@ -2,9 +2,10 @@ import { Chip, Stack } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { AnyAction } from "redux";
 import { ThemeProvider } from "styled-components";
-import { getSportById } from "../redux/actions/sportsActions";
-import { RootState } from "../redux/reducers/rootReducer";
+import { getSport } from "../features/sports/sportsSlice";
+import { RootState } from "../redux/store";
 import {
   ImgWrapper,
   InfoWrapper,
@@ -22,7 +23,7 @@ export const SportDetail = () => {
 
   useEffect(() => {
     if (id) {
-      getSportById(id)(dispatch);
+      dispatch(getSport(id) as any as AnyAction);
     }
   }, [dispatch, id]);
 

@@ -13,9 +13,9 @@ import { MdOutlineSportsKabaddi } from "react-icons/md";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-import { Sport } from "../redux/reducers/sportsReducer";
-import { RootState } from "../redux/reducers/rootReducer";
 import { useSelector } from "react-redux";
+import { Sport } from "../models/models";
+import { RootState } from "../redux/store";
 
 const linkStyle = {
   margin: "15px",
